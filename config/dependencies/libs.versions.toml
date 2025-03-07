@@ -93,7 +93,7 @@ compose-activity = { module = "androidx.activity:activity-compose" }
 
 androidstandard = ["androidx-ktx", "androidx-appcompact", "androidx-material", "androidx-lifecycle"]
 networking = ["retrofit", "retrofit-converter-gson", "okhttp", "okhttp-logging"]
-di = ["koin-android", "koin-annotations", "koin-ksp-compiler"]
+di = ["koin-android", "koin-annotations"]
 compose = ["compose-ui","compose-ui-tooling","compose-ui-tooling-preview","compose-runtime","compose-material3","compose-activity"]
 unittest = ["junit","koin-test","kotlinx-coroutines-test","arch-core-testing","mockk"]
 androidtest = ["androidx-junit","espresso-core"]

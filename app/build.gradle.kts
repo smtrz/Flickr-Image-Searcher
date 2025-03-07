@@ -28,17 +28,23 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = "17"
     }
+
     buildFeatures {
-        viewBinding = true
         buildConfig = true
         compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.5"
     }
 
     ksp {
@@ -64,6 +70,7 @@ dependencies {
 
     // Dependency Injection (Koin)
     implementation(libs.bundles.di)
+    ksp(libs.koin.ksp.compiler)
 
     // Room Database
     implementation(libs.room.runtime)
