@@ -2,7 +2,7 @@ package com.tahir.flickrimagesearcher.util
 
 import com.tahir.flickrimagesearcher.BuildConfig
 
-// Search API Utils
+// Search API
 const val BASE_URL = "https://api.flickr.com/"
 const val METHOD = "flickr.photos.search"
 const val API_KEY = BuildConfig.FLICKR_API_KEY

@@ -1,4 +1,4 @@
-package com.tahir.flickrimagesearcher.data.source.remote
+package com.tahir.flickrimagesearcher.data.source.remote.api
 
 import com.tahir.flickrimagesearcher.data.model.FlickrResponse
 import com.tahir.flickrimagesearcher.util.API_KEY
@@ -20,7 +20,8 @@ interface FlickrApiService {
         @Query("format") format: String = FORMAT,
         @Query("nojsoncallback") noJsonCallback: Int = NO_JSON_CALLBACK,
         @Query("safe_search") safeSearch: Int = SAFE_SEARCH,
-        @Query("text") searchTerm: String
+        @Query("text") searchTerm: String,
+        @Query("page") page: Int
     ): Response<FlickrResponse>
 
 }

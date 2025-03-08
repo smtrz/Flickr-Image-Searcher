@@ -1,6 +1,6 @@
 package com.tahir.flickrimagesearcher.di
 
-import com.tahir.flickrimagesearcher.data.source.remote.FlickrApiService
+import com.tahir.flickrimagesearcher.data.source.remote.api.FlickrApiService
 import com.tahir.flickrimagesearcher.util.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

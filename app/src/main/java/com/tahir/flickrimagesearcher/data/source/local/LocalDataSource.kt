@@ -1,7 +1,20 @@
 package com.tahir.flickrimagesearcher.data.source.local
 
+import com.tahir.flickrimagesearcher.data.source.local.dao.SearchHistoryDao
+import com.tahir.flickrimagesearcher.data.source.local.entity.SearchHistory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.withContext
 import org.koin.core.annotation.Single
 
 @Single
-class LocalDataSource {
+class LocalDataSource(private val searchHistoryDao: SearchHistoryDao) {
+
+    suspend fun saveSearchQuery(query: String) {
+        withContext(Dispatchers.IO) { // ✅ Ensure database write runs on IO thread
+            searchHistoryDao.insertSearchQuery(SearchHistory(query))
+        }
+    }
+
+    fun getSearchHistory() = searchHistoryDao.getSearchHistory()
 }

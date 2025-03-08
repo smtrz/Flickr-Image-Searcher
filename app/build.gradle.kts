@@ -27,6 +27,9 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "FLICKR_API_KEY", apiKey)
+        vectorDrawables {
+            useSupportLibrary = true
+        }
 
     }
 
@@ -67,6 +70,11 @@ android {
     sourceSets.getByName("main") {
         java.srcDirs("${layout.buildDirectory}/generated/ksp/main/kotlin")
     }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
 
 
 }
@@ -79,13 +87,18 @@ dependencies {
 
     // Networking
     implementation(libs.bundles.networking)
-
+    implementation("androidx.paging:paging-runtime:3.3.6")
+    implementation("androidx.paging:paging-compose:3.3.6")
+    // alternatively - without Android dependencies for tests
+    testImplementation("androidx.paging:paging-common:3.3.6")
     // Dependency Injection (Koin)
     implementation(libs.bundles.di)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
+
     ksp(libs.koin.ksp.compiler)
 
     // Room Database
-    implementation(libs.room.runtime)
+    implementation(libs.bundles.room)
     kapt(libs.room.compiler)
 
     // Logging
@@ -98,4 +111,5 @@ dependencies {
     // Testing
     testImplementation(libs.bundles.unittest)
     androidTestImplementation(libs.bundles.androidtest)
+
 }

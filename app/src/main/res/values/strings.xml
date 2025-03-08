@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Flickr Image Searcher</string>
+    <string name="title_activity_app">AppActivity</string>
 </resources>
