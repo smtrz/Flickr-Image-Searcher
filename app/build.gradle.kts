@@ -1,8 +1,17 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.ksp)
     kotlin("kapt")
+}
+
+val properties = Properties()
+properties.load(file("../local.properties").inputStream()) // Loads your local properties file
+val apiKey = properties["FLICKR_API_KEY"] as String
+require(apiKey.isNotEmpty()) {
+    "Register your api key from developer and place it in local.properties as `API_KEY`"
 }
 
 android {
@@ -17,6 +26,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "FLICKR_API_KEY", apiKey)
+
     }
 
     buildTypes {
@@ -56,8 +67,9 @@ android {
     sourceSets.getByName("main") {
         java.srcDirs("${layout.buildDirectory}/generated/ksp/main/kotlin")
     }
-}
 
+
+}
 dependencies {
     // standard
     implementation(libs.bundles.androidstandard)

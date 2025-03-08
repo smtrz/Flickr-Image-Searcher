@@ -2,6 +2,7 @@ package com.tahir.flickrimagesearcher
 
 import android.app.Application
 import com.tahir.flickrimagesearcher.di.AppModules
+import com.tahir.flickrimagesearcher.di.NetworkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext
 import org.koin.ksp.generated.module

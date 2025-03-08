@@ -46,7 +46,7 @@ androidx-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "andr
 androidx-appcompact = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompact" }
 androidx-material = { group = "com.google.android.material", name = "material", version.ref = "androidmaterial" }
 androidx-lifecycle = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleviewmodel" }
-
+kotlin-std = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
 
 # Kotlin Coroutines
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinCoroutines" }
@@ -91,9 +91,9 @@ compose-activity = { module = "androidx.activity:activity-compose" }
 
 [bundles]
 
-androidstandard = ["androidx-ktx", "androidx-appcompact", "androidx-material", "androidx-lifecycle"]
+androidstandard = ["kotlin-std", "androidx-ktx", "androidx-appcompact", "androidx-material", "androidx-lifecycle"]
 networking = ["retrofit", "retrofit-converter-gson", "okhttp", "okhttp-logging"]
 di = ["koin-android", "koin-annotations"]
-compose = ["compose-ui","compose-ui-tooling","compose-ui-tooling-preview","compose-runtime","compose-material3","compose-activity"]
-unittest = ["junit","koin-test","kotlinx-coroutines-test","arch-core-testing","mockk"]
-androidtest = ["androidx-junit","espresso-core"]
+compose = ["compose-ui", "compose-ui-tooling", "compose-ui-tooling-preview", "compose-runtime", "compose-material3", "compose-activity"]
+unittest = ["junit", "koin-test", "kotlinx-coroutines-test", "arch-core-testing", "mockk"]
+androidtest = ["androidx-junit", "espresso-core"]
