@@ -3,7 +3,6 @@ package com.tahir.flickrimagesearcher.data.source.local
 import com.tahir.flickrimagesearcher.data.source.local.dao.SearchHistoryDao
 import com.tahir.flickrimagesearcher.data.source.local.entity.SearchHistory
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import org.koin.core.annotation.Single
 
@@ -11,7 +10,7 @@ import org.koin.core.annotation.Single
 class LocalDataSource(private val searchHistoryDao: SearchHistoryDao) {
 
     suspend fun saveSearchQuery(query: String) {
-        withContext(Dispatchers.IO) { // ✅ Ensure database write runs on IO thread
+        withContext(Dispatchers.IO) {
             searchHistoryDao.insertSearchQuery(SearchHistory(query))
         }
     }

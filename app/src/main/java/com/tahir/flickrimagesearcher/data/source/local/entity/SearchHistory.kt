@@ -5,5 +5,5 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "search_history")
 data class SearchHistory(
-    @PrimaryKey val query: String // ✅ Ensures uniqueness (NO DUPLICATES)
+    @PrimaryKey val query: String
 )

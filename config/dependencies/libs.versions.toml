@@ -1,7 +1,7 @@
 [versions]
-androidGradlePlugin = "8.1.1"
-kotlin = "1.9.20"
-ksp = "1.9.20-1.0.13"
+androidGradlePlugin = "8.5.2"
+kotlin = "2.0.21"
+ksp = "2.0.21-1.0.28"
 compileSdk = "34"
 minSdk = "24"
 targetSdk = "34"
@@ -32,12 +32,17 @@ mockk = "1.13.7"
 
 # Jetpack Compose
 composeBom = "2025.02.00"
-compose-coil = "3.1.0"
 coil = "2.0.0-rc01"
+
+# paging3
+paging = "3.3.6"
+
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 androidLibrary = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 [libraries]
@@ -48,6 +53,7 @@ androidx-appcompact = { group = "androidx.appcompat", name = "appcompat", versio
 androidx-material = { group = "com.google.android.material", name = "material", version.ref = "androidmaterial" }
 androidx-lifecycle = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleviewmodel" }
 kotlin-std = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+androidx-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleviewmodel" }
 
 # Kotlin Coroutines
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinCoroutines" }
@@ -84,6 +90,7 @@ koin-test = { module = "io.insert-koin:koin-test-junit4", version.ref = "koin" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-test = { module = "androidx.room:room-testing", version.ref = "room" }
 
 # Jetpack Compose
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
@@ -93,15 +100,21 @@ compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview"
 compose-runtime = { module = "androidx.compose.runtime:runtime" }
 compose-material3 = { module = "androidx.compose.material3:material3" }
 compose-activity = { module = "androidx.activity:activity-compose" }
-compose-coil = { module = "io.coil-kt.coil3:coil-compose", version.ref = "compose-coil" }
-compose-coil-network = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "compose-coil" }
 coil = { module="io.coil-kt:coil-compose", version.ref="coil"}
+
+# paging3
+paging-runtime= { module = "androidx.paging:paging-runtime",version.ref="paging" }
+paging-compose= { module = "androidx.paging:paging-compose",version.ref="paging" }
+paging-common-test= { module = "androidx.paging:paging-common",version.ref="paging" }
+paging-testing= { module = "androidx.paging:paging-testing",version.ref="paging" }
+
 [bundles]
 
-androidstandard = ["kotlin-std", "androidx-ktx", "androidx-appcompact", "androidx-material", "androidx-lifecycle"]
+androidstandard = ["kotlin-std", "androidx-ktx", "androidx-appcompact", "androidx-material", "androidx-lifecycle","androidx-lifecycle-runtime"]
 networking = ["retrofit", "retrofit-converter-gson", "okhttp", "okhttp-logging"]
 room = ["room-runtime", "room-ktx"]
 di = ["koin-android", "koin-annotations", "koin-compose", "koin-core"]
 compose = ["compose-ui", "compose-ui-tooling", "compose-ui-tooling-preview", "compose-runtime", "compose-material3", "compose-activity", "coil"]
-unittest = ["junit", "koin-test", "kotlinx-coroutines-test", "arch-core-testing", "mockk"]
-androidtest = ["androidx-junit", "espresso-core"]
+paging = ["paging-runtime", "paging-compose"]
+unittest = ["junit", "koin-test", "kotlinx-coroutines-test", "arch-core-testing", "mockk","paging-common-test","paging-testing"]
+androidtest = ["androidx-junit", "espresso-core","room-test","kotlinx-coroutines-android","arch-core-testing"]

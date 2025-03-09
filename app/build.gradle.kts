@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.compose.compiler)
     kotlin("kapt")
 }
 
@@ -24,6 +25,7 @@ android {
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
+
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "FLICKR_API_KEY", apiKey)
@@ -87,13 +89,12 @@ dependencies {
 
     // Networking
     implementation(libs.bundles.networking)
-    implementation("androidx.paging:paging-runtime:3.3.6")
-    implementation("androidx.paging:paging-compose:3.3.6")
-    // alternatively - without Android dependencies for tests
-    testImplementation("androidx.paging:paging-common:3.3.6")
+
+    // Paging3
+    implementation(libs.bundles.paging)
+
     // Dependency Injection (Koin)
     implementation(libs.bundles.di)
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
 
     ksp(libs.koin.ksp.compiler)
 
@@ -111,5 +112,7 @@ dependencies {
     // Testing
     testImplementation(libs.bundles.unittest)
     androidTestImplementation(libs.bundles.androidtest)
+    androidTestImplementation(libs.arch.core.testing)
+
 
 }

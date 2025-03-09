@@ -5,17 +5,12 @@ import androidx.paging.PagingState
 import com.tahir.flickrimagesearcher.data.dto.ImageData
 import com.tahir.flickrimagesearcher.data.source.remote.RemoteDataSource
 import com.tahir.flickrimagesearcher.util.ResultWrapper
-import timber.log.Timber
 
 
 class FlickrPagingSource(
     private val remoteDataSource: RemoteDataSource,
     private val searchTerm: String
 ) : PagingSource<Int, ImageData>() {
-    init {
-        Timber.d("⚡ FlickrPagingSource Created for searchTerm: $searchTerm")
-
-    }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ImageData> {
         return try {

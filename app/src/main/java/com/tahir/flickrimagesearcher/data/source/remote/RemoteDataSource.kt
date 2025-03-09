@@ -7,6 +7,7 @@ import okio.IOException
 import org.koin.core.annotation.Single
 import retrofit2.HttpException
 import retrofit2.Response
+import timber.log.Timber
 
 @Single
 class RemoteDataSource(private val apiService: FlickrApiService) {
@@ -27,11 +28,13 @@ class RemoteDataSource(private val apiService: FlickrApiService) {
                 else -> ResultWrapper.Error("Unknown error", response.code())
             }
         } catch (e: IOException) {
-            ResultWrapper.Error("Network error. Please check your connection.")
+            Timber.e("Network error. Please check your connection $e")
+            ResultWrapper.Error("Network error. Please check your connection: $e")
         } catch (e: HttpException) {
+            Timber.e("HTTP error: $e")
             ResultWrapper.Error("HTTP error: ${e.message}", e.code())
         } catch (e: Exception) {
-            ResultWrapper.Error("Unexpected error: ${e.message}")
+            ResultWrapper.Error("Unexpected error: $e")
         }
     }
 }
