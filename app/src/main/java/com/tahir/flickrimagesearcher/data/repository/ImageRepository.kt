@@ -23,7 +23,7 @@ class ImageRepository(
         return Pager(
             config = PagingConfig(pageSize = 10, enablePlaceholders = false),
             pagingSourceFactory = { FlickrPagingSource(remoteDataSource, searchTerm) }
-        ).flow
+        ).flow.flowOn(Dispatchers.IO)
 
     }
 
@@ -34,5 +34,4 @@ class ImageRepository(
     fun getSearchHistory(): Flow<List<String>> =
         localDataSource.getSearchHistory()
             .map { historyList -> historyList.map { it.query } }
-            .flowOn(Dispatchers.IO)
 }

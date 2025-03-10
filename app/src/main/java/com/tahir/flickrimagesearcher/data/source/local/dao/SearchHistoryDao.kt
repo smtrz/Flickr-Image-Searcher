@@ -12,6 +12,6 @@ interface SearchHistoryDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE) // to avoid duplication
     suspend fun insertSearchQuery(query: SearchHistory)
 
-    @Query("SELECT * FROM search_history ORDER BY `query` DESC LIMIT 10")
+    @Query("SELECT * FROM search_history ORDER BY `id` DESC LIMIT 10")
     fun getSearchHistory(): Flow<List<SearchHistory>>
 }

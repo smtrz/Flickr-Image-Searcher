@@ -42,20 +42,19 @@ class SearchHistoryDaoTest {
 
     @Test
     fun insertSearchQuery_retrievesSuccessfully() = runBlocking {
-        //  Given: A search query is inserted
-        val searchQuery = SearchHistory("kotlin")
+        val searchQuery = SearchHistory(query = "karachi")
         dao.insertSearchQuery(searchQuery)
 
         val history = dao.getSearchHistory().first()
 
         assertEquals(1, history.size)
-        assertEquals("kotlin", history[0].query)
+        assertEquals("karachi", history[0].query)
     }
 
 
     @Test
     fun insertDuplicateQuery_doesNotDuplicate() = runBlocking {
-        val searchQuery = SearchHistory("tahir")
+        val searchQuery = SearchHistory(query = "tahir")
         dao.insertSearchQuery(searchQuery)
         dao.insertSearchQuery(searchQuery)
 
@@ -69,9 +68,10 @@ class SearchHistoryDaoTest {
     @Test
     fun insertMultipleQueries_retrievesInDescendingOrder() = runBlocking {
         val queries = listOf(
-            SearchHistory("query1"),
-            SearchHistory("query2"),
-            SearchHistory("query3")
+            SearchHistory(query = "query1"),
+            SearchHistory(query = "query2"),
+            SearchHistory(query = "query is 3"),
+            SearchHistory(query = "query4")
         )
 
         queries.forEach { dao.insertSearchQuery(it) }
@@ -80,9 +80,10 @@ class SearchHistoryDaoTest {
         val history = dao.getSearchHistory().first()
 
         //  History should be in descending order (latest first)
-        assertEquals(3, history.size)
-        assertEquals("query3", history[0].query) // Last inserted should be first
-        assertEquals("query2", history[1].query)
-        assertEquals("query1", history[2].query)
+        assertEquals(4, history.size)
+        assertEquals("query4", history[0].query) // Last inserted should be first
+        assertEquals("query is 3", history[1].query)
+        assertEquals("query2", history[2].query)
+        assertEquals("query1", history[3].query)
     }
 }

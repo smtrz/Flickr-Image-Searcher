@@ -2,8 +2,6 @@ package com.tahir.flickrimagesearcher
 
 import androidx.paging.Pager
 import androidx.paging.PagingData
-import androidx.paging.PagingSource
-import androidx.paging.PagingState
 import androidx.paging.testing.asSnapshot
 import com.tahir.flickrimagesearcher.data.dto.ImageData
 import com.tahir.flickrimagesearcher.data.model.FlickrResponse
@@ -85,7 +83,7 @@ class ImageRepositoryTest : KoinTest {
     @Test
     fun `getSearchHistory should return list of search terms`() = runTest {
         val fakeHistory =
-            listOf(SearchHistory("tahir"), SearchHistory("munich"), SearchHistory("germany"))
+            listOf(SearchHistory(query = "tahir"), SearchHistory(query = "munich"), SearchHistory(query = "germany"))
         every { localDataSource.getSearchHistory() } returns flowOf(fakeHistory)
         val result = imageRepository.getSearchHistory().first()
         assertEquals(fakeHistory.map { it.query }, result)
@@ -129,9 +127,7 @@ class ImageRepositoryTest : KoinTest {
             PagingData.from(fakeImageList)
         )
         val pagingDataFlow = imageRepository.searchImages(searchTerm)
-        val pagingData = pagingDataFlow.asSnapshot {
-            scrollTo(0)
-        }
+        val pagingData = pagingDataFlow.asSnapshot()
         assertNotNull(pagingDataFlow)
         assertEquals(fakeImageList, pagingData)
     }

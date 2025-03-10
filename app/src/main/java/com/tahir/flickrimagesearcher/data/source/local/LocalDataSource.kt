@@ -11,7 +11,7 @@ class LocalDataSource(private val searchHistoryDao: SearchHistoryDao) {
 
     suspend fun saveSearchQuery(query: String) {
         withContext(Dispatchers.IO) {
-            searchHistoryDao.insertSearchQuery(SearchHistory(query))
+            searchHistoryDao.insertSearchQuery(SearchHistory(query = query))
         }
     }
 
